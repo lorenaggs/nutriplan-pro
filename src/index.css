@@ -1,0 +1,614 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette */
+  --bg-color: #fdfafb; /* Very light soft pink/white */
+  --card-bg: #ffffff;
+  
+  --primary-color: #a85d6e; /* Darker dusty rose for headers */
+  --primary-light: #d8a7b1; /* Soft pink */
+  --primary-lighter: #f5eaec; /* Very soft background for table headers */
+  
+  --text-main: #3d2f31; /* Soft dark maroon/gray */
+  --text-muted: #7a6568;
+  
+  --border-color: #f0dfe1;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(168, 93, 110, 0.06);
+  --shadow-md: 0 8px 24px rgba(168, 93, 110, 0.08);
+  
+  /* Borders */
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Base Layout */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 320px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+  
+  /* Make sidebar sticky so it stays visible while scrolling the document */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar Elements */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 2.5rem;
+  color: var(--primary-color);
+}
+.logo-area h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  transition: all 0.2s ease;
+}
+.form-group input:focus, .form-group select:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(216, 167, 177, 0.2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 12px rgba(168, 93, 110, 0.2);
+}
+.btn-primary:hover {
+  background-color: #8c4a59;
+  transform: translateY(-1px);
+}
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-light);
+}
+.btn-outline:hover {
+  background-color: var(--primary-lighter);
+}
+
+/* Header & Tabs */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.tabs {
+  display: flex;
+  gap: 1rem;
+  background-color: var(--card-bg);
+  padding: 0.5rem;
+  border-radius: 100px;
+  box-shadow: var(--shadow-sm);
+}
+.tab {
+  padding: 0.6rem 1.5rem;
+  border-radius: 100px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-muted);
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+.tab.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Document View */
+.document-view {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 3rem;
+  min-height: 800px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative leaf */
+.decor-leaf {
+  position: absolute;
+  opacity: 0.05;
+  pointer-events: none;
+}
+.decor-top-right {
+  top: -50px;
+  right: -50px;
+  width: 300px;
+  transform: rotate(45deg);
+}
+.decor-bottom-left {
+  bottom: -50px;
+  left: -50px;
+  width: 250px;
+  transform: rotate(-135deg);
+}
+
+.doc-header {
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.doc-title {
+  color: var(--primary-color);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+.doc-info {
+  display: flex;
+  gap: 2rem;
+}
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+.info-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+}
+.info-value {
+  font-weight: 600;
+  color: var(--text-main);
+  font-size: 1.1rem;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+th {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+td {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  vertical-align: top;
+}
+td:first-child {
+  font-weight: 600;
+  background-color: var(--primary-lighter);
+  color: var(--primary-color);
+  width: 12%;
+}
+
+/* Shopping List */
+.shopping-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.category-card {
+  background: var(--bg-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+}
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--primary-light);
+  border-radius: 4px;
+  display: inline-block;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Indications section */
+.indications-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.indications-card {
+  background: var(--bg-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+}
+.indications-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.prep-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.prep-item h4 {
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+.prep-item ul {
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.prep-item ul li {
+  margin-bottom: 0.3rem;
+}
+
+/* Dashboard Evaluation Styles */
+.eval-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+.eval-header h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+.eval-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+.eval-header p {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.metric-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.metric-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+.metric-val-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 0.5rem;
+}
+.metric-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.metric-val {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+.metric-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.metric-pct {
+  background: var(--bg-color);
+  padding: 0.3rem 1rem;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.eval-table-container {
+  margin-bottom: 3rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+.eval-table-container table {
+  margin: 0;
+}
+.eval-table-container th {
+  background: var(--primary-color);
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+.eval-table-container td {
+  border-right: none;
+  border-left: none;
+  background: white;
+}
+.eval-table-container td:first-child {
+  background: white;
+  color: var(--text-main);
+  font-weight: normal;
+}
+.eval-table-container ul.obs-list {
+  text-align: left;
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.chart-section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+.chart-title {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.chart-title::before, .chart-title::after {
+  content: "•";
+  color: var(--primary-light);
+}
+.chart-container {
+  width: 100%;
+  height: 300px;
+}
+
+.footer-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--primary-lighter);
+  padding: 1.5rem 2rem;
+  border-radius: var(--radius-md);
+}
+
+/* Print Styles */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 5mm;
+  }
+  
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  body {
+    background-color: white;
+    font-size: 11px; /* Reduce base font size to fit */
+  }
+  
+  .sidebar, .top-bar, .btn {
+    display: none !important;
+  }
+  
+  .app-container {
+    height: auto;
+    display: block;
+  }
+  
+  .main-content {
+    padding: 0;
+    overflow: visible;
+    display: block;
+  }
+  
+  .document-view {
+    box-shadow: none;
+    padding: 10mm;
+    margin: 0;
+    min-height: auto;
+    /* Force page breaks and layout */
+    width: 100%;
+    max-width: 100%;
+    page-break-after: always;
+  }
+  
+  /* Shrink elements further to guarantee one page */
+  .doc-header {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .doc-title {
+    font-size: 1.5rem;
+  }
+  
+  th, td {
+    padding: 6px;
+    font-size: 10px;
+  }
+  
+  .indications-section {
+    margin-top: 15px;
+    gap: 15px;
+  }
+  
+  .indications-card {
+    padding: 15px;
+  }
+  
+  .prep-grid {
+    gap: 10px;
+  }
+  
+  .category-card {
+    padding: 10px;
+  }
+  
+  .shopping-grid {
+    gap: 10px;
+  }
+
+  /* Ensure decor leaves don't overlap text awkwardly in print */
+  .decor-leaf {
+    opacity: 0.03;
+  }
+  
+  .document-view:last-child {
+    page-break-after: auto;
+  }
+
+  /* --- Dashboard Evaluation Print Adjustments --- */
+  .eval-header { margin-bottom: 10px; }
+  .eval-header h1 { font-size: 1.5rem; }
+  .eval-header h2 { font-size: 1.2rem; margin-top: 5px; }
+  .eval-header p { margin-bottom: 5px; }
+  
+  .metrics-grid { margin-bottom: 15px; gap: 10px; }
+  .metric-card { padding: 10px; }
+  .metric-val { font-size: 1.3rem; margin: 5px 0 !important; }
+  .metric-icon-circle { width: 30px; height: 30px; }
+  .metric-icon-circle svg { width: 16px; height: 16px; }
+  .metric-pct { padding: 2px 8px; font-size: 0.8rem; }
+  
+  .eval-table-container { margin-bottom: 15px; }
+  .eval-table-container th, .eval-table-container td { padding: 4px; font-size: 9px; }
+  .eval-table-container ul.obs-list { padding-left: 10px; }
+  
+  .chart-section { margin-bottom: 15px; padding: 10px; }
+  .chart-title { margin-bottom: 10px; font-size: 1rem; }
+  .chart-container { height: 180px !important; }
+  
+  .footer-section { padding: 10px; }
+  .footer-section .metric-icon-circle { width: 35px !important; height: 35px !important; }
+  .footer-section .metric-icon-circle svg { width: 20px; height: 20px; }
+}
